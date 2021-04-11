@@ -23,7 +23,7 @@ public class task1 {
     }
 
     public static boolean isNarcissistic(int input) {
-        double val = 0;
+        int val = 0;
         LinkedList<Integer> numberStack = new LinkedList<Integer>();
         int number = input;
 
@@ -31,14 +31,30 @@ public class task1 {
             numberStack.push(number%10);
             number = number / 10;
         }
+        int length = numberStack.size();
         while(!numberStack.isEmpty()) {
             int i = numberStack.pop();
-            val += Math.pow(i, 3);
+            val += pow(i, length);
         }
 
-        if(input == (int)val) {
+        if(input == val) {
             return true;
         }
         return false;
     }
+
+    public static long pow(int x, int y) {
+        int result = 1;
+        while (y > 0) {
+            if ((y & 1) == 0) {
+                x *= x;
+                y >>>= 1;
+            } else {
+                result *= x;
+                y--;
+            }
+        }
+        return result;
+    }
+
 }
